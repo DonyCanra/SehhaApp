@@ -15,8 +15,8 @@ const Layout = () => {
         <div className="page">
           <div className="page-main">
             <Sidebar />
-            <div class="app-content main-content">
-              <div class="side-app">
+            <div className="app-content main-content">
+              <div className="side-app">
                 <Header />
                 <Outlet />
               </div>

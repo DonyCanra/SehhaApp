@@ -8,6 +8,10 @@ import Icons from "../../../utils/icons/IconAction";
 const DataTable = ({ data }) => {
   const { isOpen, openModal, closeModal } = useModal();
 
+  const handleStatusChange = (id, newStatus) => {
+    console.log(`Mengubah status item ${id} menjadi ${newStatus}`);
+  };
+
   return (
     <div className="table-responsive">
       <table className="table table-bordered card-table table-vcenter text-nowrap" id="datatable">
@@ -18,8 +22,8 @@ const DataTable = ({ data }) => {
             <th>Polis</th>
             <th>Date</th>
             <th>Payment Method</th>
-            <th>Status</th>
             <th>Action</th>
+            <th>Status</th>
           </tr>
         </thead>
         <tbody>
@@ -27,17 +31,50 @@ const DataTable = ({ data }) => {
             <tr key={index} className="font-weight-normal border-bottom">
               <td>{item.id}</td>
               <td>
-                <Link to="/emr">{item.patientName}</Link>
+                <Link
+                  to={{
+                    pathname: "/emr",
+                    state: { patientData: item },
+                  }}
+                >
+                  {item.patientName}
+                </Link>
               </td>
               <td>{item.polis}</td>
               <td>{item.date}</td>
               <td>{item.paymentMethod}</td>
-              <td>
-                <span className={`badge ${item.status === "Done" ? "bg-success-light border-success" : item.status === "Failed" ? "bg-danger-light border-danger" : "bg-info-light border-info"} fs-11`}>{item.status}</span>
-              </td>
               <td className="d-flex gap-2">
                 <Icons.Edit size={20} onClick={openModal} />
                 <Icons.Delete size={20} />
+              </td>
+              <td>
+                <div className="dropdown">
+                  <button
+                    className={`btn btn-sm dropdown-toggle ${item.status === "Done" ? "bg-success-light border-success" : item.status === "Failed" ? "bg-danger-light border-danger" : "bg-info-light border-info"} fs-11`}
+                    type="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    {item.status} <span className="caret"></span>
+                  </button>
+                  <ul className="dropdown-menu">
+                    <li>
+                      <button className="dropdown-item" onClick={() => handleStatusChange(item.id, "Done")}>
+                        Done
+                      </button>
+                    </li>
+                    <li>
+                      <button className="dropdown-item" onClick={() => handleStatusChange(item.id, "Failed")}>
+                        Failed
+                      </button>
+                    </li>
+                    <li>
+                      <button className="dropdown-item" onClick={() => handleStatusChange(item.id, "Pending")}>
+                        Pending
+                      </button>
+                    </li>
+                  </ul>
+                </div>
               </td>
             </tr>
           ))}

@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Timeline from "./Timeline";
 import Record from "./Record";
 import LogActivity from "./LogActivity";
@@ -32,6 +32,9 @@ const tabEMR = ["Timeline", "Record", "Log Activity"];
 
 const EMR = () => {
   const { isOpen: isOpenAddEMR, openModal: openModalAddEMR, closeModal: closeModalAddEMR } = useModal();
+  const location = useLocation();
+  const patientData = location.state?.patientData || {};
+  console.log(patientData, "<<<");
 
   return (
     <div>

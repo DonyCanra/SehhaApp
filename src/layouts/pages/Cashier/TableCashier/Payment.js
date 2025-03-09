@@ -11,9 +11,9 @@ const DataTable = ({ data }) => {
 
   return (
     <>
-      <div class="card">
-        <div class="card-header d-flex justify-content-between align-items-center">
-          <h3 class="card-title">Payment</h3>
+      <div className="card">
+        <div className="card-header d-flex justify-content-between align-items-center">
+          <h3 className="card-title">Payment</h3>
           <div className="btn-list">
             <button className="btn btn-outline-primary">
               <i className="fe fe-download me-2"></i>
@@ -21,7 +21,7 @@ const DataTable = ({ data }) => {
             </button>
           </div>
         </div>
-        <div class="card-body">
+        <div className="card-body">
           <div className="table-responsive">
             <table className="table table-bordered card-table table-vcenter text-nowrap" id="datatable">
               <thead>

@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 
-const Autocomplete = ({ label, id, name, placeholder, value, onChange, options, startIcon, className, isLoading }) => {
+const Autocomplete = ({ label, id, name, placeholder, value, onChange, options, startIcon, className, isLoading, onClose }) => {
   const [filteredOptions, setFilteredOptions] = useState([]);
   const [showOptions, setShowOptions] = useState(false);
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const inputValue = e.target.value;
@@ -30,6 +32,12 @@ const Autocomplete = ({ label, id, name, placeholder, value, onChange, options, 
     const selectedValue = `${option.code} - ${option.description}`;
     onChange({ target: { name, value: selectedValue } });
     setShowOptions(false);
+
+    if (option.path) {
+      navigate(option.path);
+      onChange({ target: { name, value: "" } });
+      onClose();
+    }
   };
 
   return (
@@ -78,6 +86,7 @@ Autocomplete.propTypes = {
       _id: PropTypes.string,
       code: PropTypes.string,
       description: PropTypes.string,
+      path: PropTypes.string,
     })
   ),
   startIcon: PropTypes.node,

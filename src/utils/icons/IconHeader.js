@@ -31,7 +31,7 @@ const IconDark = ({ size = 24 }) => (
 );
 
 const IconFullScreen = ({ size = 24 }) => (
-  <svg width={size} height={size} xmlns="http://www.w3.org/2000/svg" class="header-icon" viewBox="0 0 24 24">
+  <svg width={size} height={size} xmlns="http://www.w3.org/2000/svg" className="header-icon" viewBox="0 0 24 24">
     <path d="M5 5h5V3H3v7h2zm5 14H5v-5H3v7h7zm11-5h-2v5h-5v2h7zm-2-4h2V3h-7v2h5z" />
   </svg>
 );

@@ -28,7 +28,7 @@ const Modal = ({ show, title, onClose, children }) => {
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div className="modal-body" style={{ margin: 0, padding: 0 }}>
+            <div className="modal-body">
               {children}
             </div>
             <div className="modal-footer">

@@ -6,12 +6,12 @@ const Allergy = () => {
       <div className="card-header">
         <h3 className="card-title">Allergy</h3>
       </div>
-      <div class="card-body">
-        <div class="tags">
-          <span class="tag">Kacang</span>
-          <span class="tag">Susu</span>
-          <span class="tag">Gandum</span>
-          <span class="tag">Udara</span>
+      <div className="card-body">
+        <div className="tags">
+          <span className="tag">Kacang</span>
+          <span className="tag">Susu</span>
+          <span className="tag">Gandum</span>
+          <span className="tag">Udara</span>
         </div>
       </div>
     </>
