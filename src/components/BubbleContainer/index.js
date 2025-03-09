@@ -1,5 +1,5 @@
 import React from "react";
-import "./bubbleContainer.css";
+import "./BubbleContainer.css";
 
 const bubbleContainer = () => {
   return (

@@ -11,11 +11,11 @@ const Autocomplete = ({ label, id, name, placeholder, value, onChange, options, 
 
     if (inputValue.length >= 1) {
       const filtered = options
-        .filter(
-          (option) =>
-            option.code.toLowerCase().includes(inputValue.toLowerCase()) ||
-            option.description.toLowerCase().includes(inputValue.toLowerCase())
-        )
+        .filter((option) => {
+          const code = option.code || "";
+          const description = option.description || "";
+          return code.toLowerCase().includes(inputValue.toLowerCase()) || description.toLowerCase().includes(inputValue.toLowerCase());
+        })
         .slice(0, 10);
 
       setFilteredOptions(filtered);
@@ -39,27 +39,17 @@ const Autocomplete = ({ label, id, name, placeholder, value, onChange, options, 
       </label>
       <div className="input-group">
         {startIcon && <span className="input-group-text">{startIcon}</span>}
-        <input
-          type="text"
-          className="form-control"
-          id={id}
-          name={name}
-          placeholder={placeholder}
-          value={value}
-          onChange={handleInputChange}
-          onFocus={() => setShowOptions(true)}
-          onBlur={() => setTimeout(() => setShowOptions(false), 200)}
-        />
+        <input type="text" className="form-control" id={id} name={name} placeholder={placeholder} value={value} onChange={handleInputChange} onFocus={() => setShowOptions(true)} onBlur={() => setTimeout(() => setShowOptions(false), 200)} />
       </div>
 
       {showOptions && (
-        <ul className="list-group position-absolute w-100" style={{ zIndex: 10 }}>
+        <ul className="list-group" style={{ zIndex: 10 }}>
           {isLoading ? (
             <li className="list-group-item text-center text-muted">Loading...</li>
           ) : filteredOptions.length > 0 ? (
             filteredOptions.map((option) => (
               <li
-                key={option._id}
+                key={option._id || option.code} // Use a unique key
                 className="list-group-item list-group-item-action"
                 onMouseDown={() => handleSelectOption(option)}
                 style={{ cursor: "pointer" }}
@@ -85,9 +75,9 @@ Autocomplete.propTypes = {
   onChange: PropTypes.func,
   options: PropTypes.arrayOf(
     PropTypes.shape({
-      _id: PropTypes.string.isRequired,
-      code: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired,
+      _id: PropTypes.string,
+      code: PropTypes.string,
+      description: PropTypes.string,
     })
   ),
   startIcon: PropTypes.node,
