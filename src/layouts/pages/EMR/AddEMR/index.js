@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import LargeModal from "../../../../components/Modal/LargeModal";
+import LargeModal from "../../../../components/Modal/BaseModal";
 import Diagnoses from "./Diagnoses";
 import VitalSign from "./VitalSign";
 import DoctorNote from "./DoctorNote";

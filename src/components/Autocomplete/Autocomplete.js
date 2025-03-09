@@ -51,7 +51,7 @@ const Autocomplete = ({ label, id, name, placeholder, value, onChange, options, 
       </div>
 
       {showOptions && (
-        <ul className="list-group" style={{ zIndex: 10 }}>
+        <ul className="list-group" style={{ zIndex: 10, maxHeight: "350px", overflowY: "auto" }}>
           {isLoading ? (
             <li className="list-group-item text-center text-muted">Loading...</li>
           ) : filteredOptions.length > 0 ? (

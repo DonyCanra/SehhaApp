@@ -10,7 +10,7 @@ const FormRegistration = ({ title, show, onClose }) => {
     <>
       <div className="modal-backdrop fade show"></div>
       <div className="modal fade show" style={{ display: "block" }} id="modaldemo1">
-        <div className="modal-dialog" role="document">
+        <div className="modal-dialog modal-dialog-centered" role="document">
           <div className="modal-content modal-content-demo">
             <div className="modal-header">
               <h6 className="modal-title">{title}</h6>

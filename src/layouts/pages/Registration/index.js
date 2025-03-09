@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import useModal from "../../../components/hooks/useModal";
 import FilterDate from "../../../components/FilterDate";
 import DataTable from "./DataTable";
@@ -6,6 +7,7 @@ import AddPatient from "./FormRegistration";
 
 const Registration = () => {
   const { isOpen, openModal, closeModal } = useModal();
+  const location = useLocation();
 
   const dataDummy = [
     {
@@ -41,6 +43,15 @@ const Registration = () => {
       status: "Failed",
     },
   ];
+
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    const addPatientParam = queryParams.get("addPatient");
+
+    if (addPatientParam === "true") {
+      openModal();
+    }
+  }, [location, openModal]);
 
   return (
     <div>
@@ -80,7 +91,9 @@ const Registration = () => {
       </div>
 
       {/* AddPatient Component */}
-      <AddPatient title="Add New Patient" show={isOpen} onClose={closeModal} />
+      {isOpen && ( // ✅ Render hanya jika modal terbuka
+        <AddPatient title="Add New Patient" show={isOpen} onClose={closeModal} />
+      )}
     </div>
   );
 };

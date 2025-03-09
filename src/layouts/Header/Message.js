@@ -2,7 +2,7 @@ import Icons from "../../utils/icons/IconHeader";
 
 const Message = () => {
   return (
-    <div className="dropdown header-message d-flex">
+    <div className="dropdown header-message d-flex" style={{ cursor: "pointer" }}>
       <div className="nav-link icon" data-bs-toggle="dropdown">
         <Icons.Message />
         <span className="badge bg-success side-badge">5</span>

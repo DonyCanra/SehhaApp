@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import LargeModal from "../../components/Modal/LargeModal";
+import LargeModal from "../../components/Modal/BaseModal";
 import Autocomplete from "../../components/Autocomplete/Autocomplete";
 import Search from "../../utils/icons/IconSearch";
 import { listRoutes } from "../../constants";

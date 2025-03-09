@@ -35,4 +35,8 @@ export const listRoutes = [
   { _id: "5", code: "cashier", description: "Access Cashier Module", path: "/cashier" },
   { _id: "6", code: "profile", description: "View or Edit User Profile", path: "/profile" },
   { _id: "7", code: "setting", description: "Manage Application Settings", path: "/setting" },
+  { _id: "8", code: "user management", description: "Manage User Permissions", path: "/setting?tab=user-management" },
+  { _id: "9", code: "role management", description: "Manage Roles Permissions", path: "/setting?tab=role-management" },
+  { _id: "10", code: "add role management", description: "Manage User Roles and Permissions", path: "/setting?tab=role-management&addRole=true" },
+  { _id: "11", code: "add patient", description: "Add Patient", path: "/registration?&addPatient=true" },
 ];

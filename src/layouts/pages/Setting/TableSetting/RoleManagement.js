@@ -4,15 +4,21 @@ import AddRole from "../FormSetting/FormRole";
 import EditRole from "../FormSetting/FormRole";
 import Icons from "../../../../utils/icons/IconAction";
 
-const DataTable = ({ data }) => {
-  const { isOpen: isAddRoleOpen, openModal: openAddRole, closeModal: closeAddRole } = useModal();
+const DataTable = ({ data, isAddRoleOpen, onAddRoleClose }) => {
+  const { isOpen: isLocalAddRoleOpen, openModal: openAddRole, closeModal: closeAddRole } = useModal();
   const { isOpen: isEditRoleOpen, openModal: openEditRole, closeModal: closeEditRole } = useModal();
+
+  const isFormOpen = isAddRoleOpen || isLocalAddRoleOpen;
+  const handleCloseForm = () => {
+    closeAddRole();
+    onAddRoleClose(); // Panggil fungsi onAddRoleClose dari prop
+  };
 
   return (
     <>
       <div className="card">
         <div className="card-header d-flex justify-content-between align-items-center">
-          <h3 className="card-title">User Management</h3>
+          <h3 className="card-title">Role Management</h3>
           <div className="btn-list">
             {/* Tombol untuk membuka modal Add Role */}
             <button className="btn btn-outline-primary" onClick={openAddRole}>
@@ -53,7 +59,7 @@ const DataTable = ({ data }) => {
         </div>
 
         {/* Modal untuk Add Role */}
-        <AddRole title="Add Role" show={isAddRoleOpen} onClose={closeAddRole} />
+        <AddRole title="Add Role" show={isFormOpen} onClose={handleCloseForm} />
 
         {/* Modal untuk Edit Role */}
         <EditRole title="Edit Role" show={isEditRoleOpen} onClose={closeEditRole} />

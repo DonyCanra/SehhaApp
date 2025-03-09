@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import DataTableMedicine from "./TableSetting/UserManagement";
 import DataTableCustomMedicine from "./TableSetting/RoleManagement";
 import PageHeader from "../../../components/PageHeader";
 
 const GeneralSetting = () => {
-  const [tabs, setTabs] = React.useState(1);
+  const [tabs, setTabs] = React.useState("user-management");
+  const [isAddRoleOpen, setIsAddRoleOpen] = useState(false);
+  const location = useLocation();
 
-  // Data dummy untuk tabel
   const dataDummy = [
     { id: "1", nameUser: "User 1", joinDate: "09 Dec 2017", status: "Active", role: "Owner" },
     { id: "2", nameUser: "User 2", joinDate: "09 Dec 2017", status: "Inactive", role: "Owner" },
@@ -20,6 +22,20 @@ const GeneralSetting = () => {
     { id: "3", nameRole: "Nurse" },
     { id: "4", nameRole: "Admin" },
   ];
+
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    const tabParam = queryParams.get("tab");
+    const addRoleParam = queryParams.get("addRole");
+
+    if (tabParam) {
+      setTabs(tabParam);
+    }
+
+    if (addRoleParam === "true") {
+      setIsAddRoleOpen(true);
+    }
+  }, [location]);
 
   return (
     <div>
@@ -35,17 +51,21 @@ const GeneralSetting = () => {
             <div className="card-body">
               <nav aria-label="breadcrumb">
                 <ol className="breadcrumb1 bg-primary mb-0">
-                  <li className={`breadcrumb-item1 ${tabs === 1 ? "text-black" : "text-white"}`} onClick={() => setTabs(1)} style={{ cursor: "pointer" }}>
+                  <li className={`breadcrumb-item1 ${tabs === "user-management" ? "text-black" : "text-white"}`} onClick={() => setTabs("user-management")} style={{ cursor: "pointer" }}>
                     User Management
                   </li>
-                  <li className={`breadcrumb-item1 ${tabs === 2 ? "text-black" : "text-white"}`} onClick={() => setTabs(2)} style={{ cursor: "pointer" }}>
+                  <li className={`breadcrumb-item1 ${tabs === "role-management" ? "text-black" : "text-white"}`} onClick={() => setTabs("role-management")} style={{ cursor: "pointer" }}>
                     Role Management
                   </li>
                 </ol>
               </nav>
 
               {/* Tabel Data */}
-              {tabs === 1 ? <DataTableMedicine data={dataDummy} /> : tabs === 2 ? <DataTableCustomMedicine data={dataDummy2} /> : null}
+              {tabs === "user-management" ? (
+                <DataTableMedicine data={dataDummy} />
+              ) : tabs === "role-management" ? (
+                <DataTableCustomMedicine data={dataDummy2} isAddRoleOpen={isAddRoleOpen} onAddRoleClose={() => setIsAddRoleOpen(false)} />
+              ) : null}
             </div>
           </div>
         </div>

@@ -59,17 +59,17 @@ const DataTable = ({ data }) => {
                   </button>
                   <ul className="dropdown-menu">
                     <li>
-                      <button className="dropdown-item" onClick={() => handleStatusChange(item.id, "Done")}>
+                      <button className="dropdown-item" onClick={() => handleStatusChange(item.id, "Done")} style={{ color: "green" }}>
                         Done
                       </button>
                     </li>
                     <li>
-                      <button className="dropdown-item" onClick={() => handleStatusChange(item.id, "Failed")}>
+                      <button className="dropdown-item" onClick={() => handleStatusChange(item.id, "Failed")} style={{ color: "red" }}>
                         Failed
                       </button>
                     </li>
                     <li>
-                      <button className="dropdown-item" onClick={() => handleStatusChange(item.id, "Pending")}>
+                      <button className="dropdown-item" onClick={() => handleStatusChange(item.id, "Pending")} style={{ color: "blue" }}>
                         Pending
                       </button>
                     </li>

@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import LargeModal from "../../../components/Modal/LargeModal";
+import LargeModal from "../../../components/Modal/BaseModal";
 
 const FormRegistration = ({ title, show, onClose }) => {
   if (!show) return null;
