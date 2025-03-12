@@ -9,20 +9,6 @@ const GeneralSetting = () => {
   const [isAddRoleOpen, setIsAddRoleOpen] = useState(false);
   const location = useLocation();
 
-  const dataDummy = [
-    { id: "1", nameUser: "User 1", joinDate: "09 Dec 2017", status: "Active", role: "Owner" },
-    { id: "2", nameUser: "User 2", joinDate: "09 Dec 2017", status: "Inactive", role: "Owner" },
-    { id: "3", nameUser: "User 3", joinDate: "09 Dec 2017", status: "Active", role: "Owner" },
-    { id: "4", nameUser: "User 4", joinDate: "09 Dec 2017", status: "Inactive", role: "Owner" },
-  ];
-
-  const dataDummy2 = [
-    { id: "1", nameRole: "Owner" },
-    { id: "2", nameRole: "Doctor" },
-    { id: "3", nameRole: "Nurse" },
-    { id: "4", nameRole: "Admin" },
-  ];
-
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
     const tabParam = queryParams.get("tab");
@@ -73,5 +59,19 @@ const GeneralSetting = () => {
     </div>
   );
 };
+
+const dataDummy = [
+  { id: "1", nameUser: "User 1", joinDate: "09 Dec 2017", status: "Active", role: "Owner" },
+  { id: "2", nameUser: "User 2", joinDate: "09 Dec 2017", status: "Inactive", role: "Owner" },
+  { id: "3", nameUser: "User 3", joinDate: "09 Dec 2017", status: "Active", role: "Owner" },
+  { id: "4", nameUser: "User 4", joinDate: "09 Dec 2017", status: "Inactive", role: "Owner" },
+];
+
+const dataDummy2 = [
+  { id: "1", nameRole: "Owner" },
+  { id: "2", nameRole: "Doctor" },
+  { id: "3", nameRole: "Nurse" },
+  { id: "4", nameRole: "Admin" },
+];
 
 export default GeneralSetting;

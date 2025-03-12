@@ -1,34 +1,32 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser } from "../redux/actions/authActions";
 import BubbleContainer from "../components/BubbleContainer";
 
 const LoginPage = () => {
-  const [form, setForm] = useState({ username: "", password: "", showPassword: false, rememberMe: false });
-  const [isLoading, setIsLoading] = useState(false);
+  const [form, setForm] = useState({ email: "", password: "", showPassword: false, rememberMe: false });
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { loading, error } = useSelector((state) => state.auth);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (!form.username || !form.password) {
-      toast.error("Username and password is required!");
+    if (!form.email || !form.password) {
+      toast.error("email and password is required!");
       return;
     }
 
-    setIsLoading(true); // Aktifkan loading
-    const token = "Dony Ganteng";
-
-    setTimeout(() => {
-      if (form.rememberMe) {
-        localStorage.setItem("token", token);
-      } else {
-        sessionStorage.setItem("token", token);
-      }
-      toast.success("Login Successfully!");
-      setIsLoading(false);
-      navigate("/");
-    }, 1500);
+    dispatch(loginUser({ email: form.email, password: form.password, rememberMe: form.rememberMe }))
+      .unwrap()
+      .then(() => {
+        toast.success("Login Successfully!");
+        navigate("/");
+      })
+      .catch((err) => {
+        toast.error(err || "Login Failed!");
+      });
   };
 
   return (
@@ -52,7 +50,7 @@ const LoginPage = () => {
                         <span className="input-group-text">
                           <i className="fe fe-user" aria-hidden="true"></i>
                         </span>
-                        <input type="text" className="form-control" placeholder="Username" value={form.username} onChange={(e) => setForm({ ...form, username: e.target.value })} />
+                        <input type="text" className="form-control" placeholder="Email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
                       </div>
 
                       <div className="input-group mb-4">
@@ -69,8 +67,8 @@ const LoginPage = () => {
                         </label>
                       </div>
 
-                      <button style={{ color: "#008080" }} type="submit" className="btn btn-primary btn-lg w-100 br-7 mt-3" disabled={isLoading}>
-                        {isLoading ? (
+                      <button style={{ color: "#008080" }} type="submit" className="btn btn-primary btn-lg w-100 br-7 mt-3" disabled={loading}>
+                        {loading ? (
                           <>
                             <span className="spinner-border spinner-border-sm me-2"></span>Logging in...
                           </>
@@ -78,6 +76,8 @@ const LoginPage = () => {
                           "Log In"
                         )}
                       </button>
+
+                      {error && <p className="text-danger text-center mt-2">{error}</p>}
 
                       <div className="text-center mt-3">
                         <Link to="/resend-email">Forgot Password?</Link>

@@ -9,41 +9,6 @@ const Registration = () => {
   const { isOpen, openModal, closeModal } = useModal();
   const location = useLocation();
 
-  const dataDummy = [
-    {
-      id: "1",
-      patientName: "Patient 1",
-      polis: "POLI UMUM",
-      date: "04/3/2025",
-      paymentMethod: "Tunai",
-      status: "Done",
-    },
-    {
-      id: "2",
-      patientName: "Patient 2",
-      polis: "POLI UMUM",
-      date: "04/3/2025",
-      paymentMethod: "BPJS Kesehatan",
-      status: "Engaged",
-    },
-    {
-      id: "3",
-      patientName: "Patient 3",
-      polis: "POLI UMUM",
-      date: "04/3/2025",
-      paymentMethod: "Asuransi",
-      status: "Confirmed",
-    },
-    {
-      id: "4",
-      patientName: "Patient 4",
-      polis: "POLI UMUM",
-      date: "04/3/2025",
-      paymentMethod: "Gopay",
-      status: "Failed",
-    },
-  ];
-
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
     const addPatientParam = queryParams.get("addPatient");
@@ -97,5 +62,40 @@ const Registration = () => {
     </div>
   );
 };
+
+const dataDummy = [
+  {
+    id: "1",
+    patientName: "Patient 1",
+    polis: "POLI UMUM",
+    date: "04/3/2025",
+    paymentMethod: "Tunai",
+    status: "Done",
+  },
+  {
+    id: "2",
+    patientName: "Patient 2",
+    polis: "POLI UMUM",
+    date: "04/3/2025",
+    paymentMethod: "BPJS Kesehatan",
+    status: "Engaged",
+  },
+  {
+    id: "3",
+    patientName: "Patient 3",
+    polis: "POLI UMUM",
+    date: "04/3/2025",
+    paymentMethod: "Asuransi",
+    status: "Confirmed",
+  },
+  {
+    id: "4",
+    patientName: "Patient 4",
+    polis: "POLI UMUM",
+    date: "04/3/2025",
+    paymentMethod: "Gopay",
+    status: "Failed",
+  },
+];
 
 export default Registration;

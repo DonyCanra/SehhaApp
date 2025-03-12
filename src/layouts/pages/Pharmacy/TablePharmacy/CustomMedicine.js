@@ -2,15 +2,26 @@ import React from "react";
 import PropTypes from "prop-types";
 import formatPrice from "../../../../utils/formatPrice";
 import Icons from "../../../../utils/icons/IconAction";
+import AddCustomMedicine from "../FormPharmacy/CustomMedicine";
+import EditCustomMedicine from "../FormPharmacy/CustomMedicine";
+import useModal from "../../../../components/hooks/useModal";
 
-const DataTable = ({ data }) => {
+const DataTable = ({ data, isAddCustomMedicineOpen, onAddCustomMedicineClose }) => {
+  const { isOpen: isLocalAddCustomMedicineOpen, openModal: openAddCustomMedicine, closeModal: closeAddCustomMedicine } = useModal();
+  const { isOpen: isEditCustomMedicineOpen, openModal: openEditCustomMedicine, closeModal: closeEditCustomMedicine } = useModal();
+
+  const isFormOpen = isAddCustomMedicineOpen || isLocalAddCustomMedicineOpen;
+  const handleCloseForm = () => {
+    closeAddCustomMedicine();
+    onAddCustomMedicineClose();
+  };
   return (
     <>
       <div className="card">
         <div className="card-header d-flex justify-content-between align-items-center">
           <h3 className="card-title">Custom Medicine</h3>
           <div className="btn-list">
-            <button className="btn btn-outline-primary">
+            <button className="btn btn-outline-primary" onClick={openAddCustomMedicine}>
               <i className="fe fe-plus me-2"></i>
               Custom Medicine
             </button>
@@ -42,7 +53,7 @@ const DataTable = ({ data }) => {
                     <td>{formatPrice(item.price, "IDR")}</td>
                     <td>{item.createdAt}</td>
                     <td className="d-flex gap-2">
-                      <Icons.Edit size={20} onClick={() => {}} />
+                      <Icons.Edit size={20} onClick={openEditCustomMedicine} />
                       <Icons.Delete size={20} />
                     </td>
                   </tr>
@@ -51,6 +62,8 @@ const DataTable = ({ data }) => {
             </table>
           </div>
         </div>
+        <AddCustomMedicine title="Add Custom Medicine" show={isFormOpen} onClose={handleCloseForm} />
+        <EditCustomMedicine title="Edit Custom Medicine" show={isEditCustomMedicineOpen} onClose={closeEditCustomMedicine} />
       </div>
     </>
   );

@@ -39,4 +39,7 @@ export const listRoutes = [
   { _id: "9", code: "role management", description: "Manage Roles Permissions", path: "/setting?tab=role-management" },
   { _id: "10", code: "add role management", description: "Manage User Roles and Permissions", path: "/setting?tab=role-management&addRole=true" },
   { _id: "11", code: "add patient", description: "Add Patient", path: "/registration?&addPatient=true" },
+  { _id: "12", code: "add medicine", description: "Add Medicine", path: "/pharmacy?&addMedicine=true" },
+  { _id: "13", code: "add custom medicine", description: "Add Custom Medicine", path: "/pharmacy?&addCustomMedicine=true" },
+  { _id: "14", code: "add medicine package", description: "Add Medicine Package", path: "/pharmacy?&addMedicinePackage=true" },
 ];

@@ -2,12 +2,19 @@ import React from "react";
 import PropTypes from "prop-types";
 import formatPrice from "../../../../utils/formatPrice";
 import useModal from "../../../../components/hooks/useModal";
-import AddMedicine from "../FormPharmacy/FormPharmacy";
-import EditMedicine from "../FormPharmacy/FormPharmacy";
+import AddMedicine from "../FormPharmacy/Medicine";
+import EditMedicine from "../FormPharmacy/Medicine";
 import Icons from "../../../../utils/icons/IconAction";
 
-const DataTable = ({ data }) => {
-  const { isOpen, openModal, closeModal } = useModal();
+const DataTable = ({ data, isAddMedicineOpen, onAddMedicineClose }) => {
+  const { isOpen: isLocalAddMedicineOpen, openModal: openAddMedicine, closeModal: closeAddMedicine } = useModal();
+  const { isOpen: isEditMedicineOpen, openModal: openEditMedicine, closeModal: closeEditMedicine } = useModal();
+
+  const isFormOpen = isAddMedicineOpen || isLocalAddMedicineOpen;
+  const handleCloseForm = () => {
+    closeAddMedicine();
+    onAddMedicineClose();
+  };
 
   return (
     <>
@@ -15,7 +22,7 @@ const DataTable = ({ data }) => {
         <div className="card-header d-flex justify-content-between align-items-center">
           <h3 className="card-title">Medicine</h3>
           <div className="btn-list">
-            <button className="btn btn-outline-primary" onClick={openModal}>
+            <button className="btn btn-outline-primary" onClick={openAddMedicine}>
               <i className="fe fe-plus me-2"></i>
               Medicine
             </button>
@@ -47,7 +54,7 @@ const DataTable = ({ data }) => {
                     <td>{formatPrice(item.price, "IDR")}</td>
                     <td>{item.createdAt}</td>
                     <td className="d-flex gap-2">
-                      <Icons.Edit size={20} onClick={openModal} />
+                      <Icons.Edit size={20} onClick={openEditMedicine} />
                       <Icons.Delete size={20} />
                     </td>
                   </tr>
@@ -56,8 +63,8 @@ const DataTable = ({ data }) => {
             </table>
           </div>
         </div>
-        <AddMedicine title="Add Medicine" show={isOpen} onClose={closeModal} />
-        <EditMedicine title="Edit Medicine" show={isOpen} onClose={closeModal} />
+        <AddMedicine title="Add Medicine" show={isFormOpen} onClose={handleCloseForm} />
+        <EditMedicine title="Edit Medicine" show={isEditMedicineOpen} onClose={closeEditMedicine} />
       </div>
     </>
   );

@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import BaseModal from "../../../../components/Modal/BaseModal";
 
-const AddMedicinePackage = ({ title, show, onClose }) => {
+const AddMedicine = ({ title, show, onClose }) => {
   if (!show) {
     return null;
   }
@@ -33,10 +33,10 @@ const AddMedicinePackage = ({ title, show, onClose }) => {
   );
 };
 
-AddMedicinePackage.propTypes = {
+AddMedicine.propTypes = {
   title: PropTypes.string.isRequired,
   show: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
 };
 
-export default AddMedicinePackage;
+export default AddMedicine;
