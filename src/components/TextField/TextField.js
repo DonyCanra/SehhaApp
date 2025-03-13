@@ -25,7 +25,7 @@ TextField.propTypes = {
   value: PropTypes.string,
   onChange: PropTypes.func,
   startIcon: PropTypes.node,
-  endIcon: PropTypes.node, // Menambahkan PropTypes untuk endIcon
+  endIcon: PropTypes.node,
 };
 
 TextField.defaultProps = {
@@ -35,7 +35,7 @@ TextField.defaultProps = {
   value: "",
   onChange: () => {},
   startIcon: null,
-  endIcon: null, // Default null jika tidak digunakan
+  endIcon: null,
 };
 
 export default TextField;

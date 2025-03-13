@@ -1,16 +1,17 @@
 import React, { useState } from "react";
-import LoaderGlobal from "../components/LoaderGlobal";
+import FirstLoading from "../components/Loader/FirstLoading";
 import Sidebar from "./Sidebar";
 import Header from "./Header";
 import Footer from "./Footer";
 import { Outlet } from "react-router-dom";
+import BackTop from "../components/BackTop";
 
 const Layout = () => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   return (
     <React.Fragment>
-      {!isLoaded && <LoaderGlobal onFinish={() => setIsLoaded(true)} duration={2000} />}
+      {!isLoaded && <FirstLoading onFinish={() => setIsLoaded(true)} duration={2000} />}
       {isLoaded && (
         <div className="page">
           <div className="page-main">
@@ -25,9 +26,7 @@ const Layout = () => {
           </div>
         </div>
       )}
-      <a href="#top" id="back-to-top">
-        <i className="fe fe-chevron-up"></i>
-      </a>
+      <BackTop />
     </React.Fragment>
   );
 };

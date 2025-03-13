@@ -3,12 +3,14 @@ import { Toaster } from "react-hot-toast";
 import router from "./routes";
 import { Provider } from "react-redux";
 import store from "./redux/store/store";
+import GlobalLoading from "./components/Loader/GlobalLoading";
 
 function App() {
   return (
     <>
-      <Toaster position="top-right" reverseOrder={false} />
       <Provider store={store}>
+        <GlobalLoading />
+        <Toaster position="top-right" reverseOrder={false} />
         <RouterProvider router={router} />
       </Provider>
     </>

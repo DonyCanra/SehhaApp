@@ -4,19 +4,18 @@ import PropTypes from "prop-types";
 const BaseModal = ({ show, title, onClose, children, width }) => {
   useEffect(() => {
     if (show) {
-      document.body.style.overflow = "hidden"; // Mencegah scrolling pada halaman utama
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = ""; // Kembalikan normal saat modal ditutup
+      document.body.style.overflow = "";
     }
 
     return () => {
-      document.body.style.overflow = ""; // Cleanup saat komponen unmount
+      document.body.style.overflow = "";
     };
   }, [show]);
 
   if (!show) return null;
 
-  // Menentukan class modal berdasarkan ukuran yang diberikan
   const modalSizeClass =
     {
       sm: "modal-sm",
@@ -25,7 +24,6 @@ const BaseModal = ({ show, title, onClose, children, width }) => {
       xl: "modal-xl",
     }[width] || "";
 
-  // Jika width dalam format angka (px, %) gunakan inline style
   const modalStyle = typeof width === "string" && (width.includes("px") || width.includes("%")) ? { maxWidth: width } : {};
 
   return (

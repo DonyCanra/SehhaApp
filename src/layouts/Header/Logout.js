@@ -1,24 +1,27 @@
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { toast } from "react-hot-toast";
+import { setLoading } from "../../redux/slices/globalSlice"; // Import action Redux
 import Icons from "../../utils/icons/IconHeader";
 
 const Logout = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleLogout = () => {
-    // Hapus auth data dari localStorage & sessionStorage
-    localStorage.removeItem("authToken");
-    localStorage.removeItem("user");
-    sessionStorage.removeItem("authToken");
-    sessionStorage.removeItem("user");
+    dispatch(setLoading(true));
 
-    // Tampilkan notifikasi logout
-    toast.success("Logout Successfully!", { duration: 1500 });
-
-    // Tunggu sebentar sebelum redirect
     setTimeout(() => {
+      localStorage.removeItem("authToken");
+      localStorage.removeItem("user");
+      sessionStorage.removeItem("authToken");
+      sessionStorage.removeItem("user");
+
+      toast.success("Logout Successfully!", { duration: 1500 });
+
+      dispatch(setLoading(false));
       navigate("/login");
-    }, 3000);
+    }, 2000);
   };
 
   return (
