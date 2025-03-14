@@ -8,7 +8,6 @@ const BaseModal = ({ show, title, onClose, children, width }) => {
     } else {
       document.body.style.overflow = "";
     }
-
     return () => {
       document.body.style.overflow = "";
     };
@@ -16,21 +15,11 @@ const BaseModal = ({ show, title, onClose, children, width }) => {
 
   if (!show) return null;
 
-  const modalSizeClass =
-    {
-      sm: "modal-sm",
-      md: "",
-      lg: "modal-lg",
-      xl: "modal-xl",
-    }[width] || "";
-
-  const modalStyle = typeof width === "string" && (width.includes("px") || width.includes("%")) ? { maxWidth: width } : {};
-
   return (
     <>
       <div className="modal-backdrop show"></div>
       <div className="modal" style={{ display: "block" }}>
-        <div className={`modal-dialog modal-dialog-centered ${modalSizeClass}`} style={modalStyle} role="document">
+        <div className="modal-dialog modal-dialog-centered modal-lg" role="document">
           <div className="modal-content">
             <div className="modal-header">
               <h6 className="modal-title">{title}</h6>
@@ -59,12 +48,10 @@ BaseModal.propTypes = {
   title: PropTypes.string.isRequired,
   onClose: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired,
-  width: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf(["sm", "md", "lg", "xl"])]),
 };
 
 BaseModal.defaultProps = {
   show: false,
-  width: "lg",
 };
 
 export default BaseModal;

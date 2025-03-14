@@ -6,7 +6,7 @@ import PageHeader from "../../../components/PageHeader";
 import { useLocation } from "react-router-dom";
 
 const Pharmacy = () => {
-  const [tabs, setTabs] = React.useState(1);
+  const [tabs, setTabs] = React.useState("medicine");
   const [isAddMedicineOpen, setIsAddMedicineOpen] = useState(false);
   const [isAddCustomMedicineOpen, setIsAddCustomMedicineOpen] = useState(false);
   const [isAddMedicinePackageOpen, setIsAddMedicinePackageOpen] = useState(false);
@@ -68,24 +68,24 @@ const Pharmacy = () => {
             <div className="card-body">
               <nav aria-label="breadcrumb">
                 <ol className="breadcrumb1 bg-primary mb-0">
-                  <li className={`breadcrumb-item1 ${tabs === 1 ? "text-black" : "text-white"}`} onClick={() => setTabs(1)} style={{ cursor: "pointer" }}>
+                  <li className={`breadcrumb-item1 ${tabs === "medicine" ? "text-black" : "text-white"}`} onClick={() => setTabs("medicine")} style={{ cursor: "pointer" }}>
                     Medicine
                   </li>
-                  <li className={`breadcrumb-item1 ${tabs === 2 ? "text-black" : "text-white"}`} onClick={() => setTabs(2)} style={{ cursor: "pointer" }}>
+                  <li className={`breadcrumb-item1 ${tabs === "custom-medicine" ? "text-black" : "text-white"}`} onClick={() => setTabs("custom-medicine")} style={{ cursor: "pointer" }}>
                     Custom Medicine
                   </li>
-                  <li className={`breadcrumb-item1 ${tabs === 3 ? "text-black" : "text-white"}`} onClick={() => setTabs(3)} style={{ cursor: "pointer" }}>
+                  <li className={`breadcrumb-item1 ${tabs === "medicine-package" ? "text-black" : "text-white"}`} onClick={() => setTabs("medicine-package")} style={{ cursor: "pointer" }}>
                     Medicine Package
                   </li>
                 </ol>
               </nav>
 
               {/* Tabel Data */}
-              {tabs === 1 ? (
+              {tabs === "medicine" ? (
                 <DataTableMedicine data={dataDummy} isAddMedicineOpen={isAddMedicineOpen} onAddMedicineClose={() => setIsAddMedicineOpen(false)} />
-              ) : tabs === 2 ? (
+              ) : tabs === "custom-medicine" ? (
                 <DataTableCustomMedicine data={dataDummy2} isAddCustomMedicineOpen={isAddCustomMedicineOpen} onAddCustomMedicineClose={() => setIsAddCustomMedicineOpen(false)} />
-              ) : tabs === 3 ? (
+              ) : tabs === "medicine-package" ? (
                 <DataTableMedicinePackage data={dataDummy3} isAddMedicinePackageOpen={isAddMedicinePackageOpen} onAddMedicinePackageClose={() => setIsAddMedicinePackageOpen(false)} />
               ) : null}
             </div>
