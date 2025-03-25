@@ -12,6 +12,7 @@ import Profile from "../layouts/pages/Profile";
 import Setting from "../layouts/pages/Setting";
 import Pharmacy from "../layouts/pages/Pharmacy";
 import Cashier from "../layouts/pages/Cashier";
+import Chat from "../layouts/pages/Chat";
 import PageNotFound from "../components/ErrorPages/404";
 
 // Protected Route Component
@@ -74,6 +75,10 @@ const router = createBrowserRouter([
       {
         path: "/setting",
         element: <ProtectedRoute element={<Setting />} />,
+      },
+      {
+        path: "/chat",
+        element: <ProtectedRoute element={<Chat />} />,
       },
     ],
   },

@@ -8,6 +8,7 @@ export const menuItems = [
       { name: "EMR", icon: "EMR", path: "/emr" },
       { name: "Pharmacy", icon: "Pharmacy", path: "/pharmacy" },
       { name: "Cashier", icon: "Cashier", path: "/cashier" },
+      { name: "Chat", icon: "Cashier", path: "/chat" },
     ],
   },
   {

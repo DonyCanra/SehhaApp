@@ -1,7 +1,7 @@
 import React from "react";
-import "./BubbleContainer.css";
+import "./BubbleContainer.module.css";
 
-const bubbleContainer = () => {
+const BubbleContainer = () => {
   return (
     <div className="bubble-container">
       {[...Array(10)].map((_, index) => (
@@ -11,4 +11,4 @@ const bubbleContainer = () => {
   );
 };
 
-export default bubbleContainer;
+export default BubbleContainer;
