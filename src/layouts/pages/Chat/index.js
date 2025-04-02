@@ -153,16 +153,28 @@ const Chat = () => {
     ],
   };
 
-  const handleSendMessage = (e) => {
-    e.preventDefault();
-    if (message.trim()) {
-      // In a real app, you would add the message to your state management
-      setMessage("");
-    }
-  };
-
   const handleChatSelect = (chatId) => {
     setActiveChat(chatId);
+  };
+
+  const handleSendMessage = (e) => {
+    e.preventDefault();
+    if (!message.trim()) return;
+
+    setMessage((prevChats) => ({
+      ...prevChats,
+      [activeChat]: [
+        ...(prevChats[activeChat] || []),
+        {
+          id: new Date().getTime(),
+          text: message,
+          time: new Date().toLocaleTimeString(),
+          isMe: true,
+        },
+      ],
+    }));
+
+    setMessage("");
   };
 
   return (
@@ -327,22 +339,7 @@ const ChatHeader = ({ contact }) => {
       <ul className="ah-actions actions align-items-center">
         <li>
           <div className="br-7">
-            <i className="fe fe-phone text-muted"></i>
-          </div>
-        </li>
-        <li>
-          <div className="br-7">
-            <i className="fe fe-folder-plus text-muted"></i>
-          </div>
-        </li>
-        <li>
-          <div className="br-7">
-            <i className="fe fe-trash-2 text-muted"></i>
-          </div>
-        </li>
-        <li>
-          <div className="br-7">
-            <i className="fe fe-alert-octagon text-muted"></i>
+            <i style={{ fontSize: "24px" }} className="fe fe-phone text-muted"></i>
           </div>
         </li>
         <li className="dropdown">

@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-// import API from "../../services/api";
+import API from "../../services/api";
 
 const saveToken = (token, rememberMe) => {
   if (rememberMe) {
@@ -16,9 +16,9 @@ export const clearAuthData = () => {
 
 export const loginUser = createAsyncThunk("auth/loginUser", async ({ email, password, rememberMe }, { rejectWithValue }) => {
   try {
-    // const response = await API.post("/login", { email, password });
-    // const userData = response.data;
-    const userData = { email, password };
+    const response = await API.post("/auth/login", { email, password });
+    const userData = response.data;
+    // const userData = { email, password };
     saveToken(userData.data, rememberMe);
     return userData;
   } catch (error) {
