@@ -1,5 +1,4 @@
 import React from "react";
-import { useSelector } from "react-redux";
 // import { Link } from "react-router-dom";
 import toggleFullScreen from "../../utils/toggleFullScreen";
 import Icons from "../../utils/icons/IconHeader";
@@ -16,10 +15,7 @@ import ModalSearchFeatures from "./ModalSearchFeatures";
 // import Language from "./Language";
 
 const Header = () => {
-  const KConfiqData = useSelector((state) => state.auth.KConfiqData);
   const { isOpen: isOpenSearchFeature, openModal: openModalSearchFeature, closeModal: closeModalSearchFeature } = useModal();
-
-  console.log(KConfiqData, "<<<");
 
   return (
     <>

@@ -16,10 +16,12 @@ export const clearAuthData = () => {
 
 export const loginUser = createAsyncThunk("auth/loginUser", async ({ email, password, rememberMe }, { rejectWithValue }) => {
   try {
-    const response = await API.post("/auth/login", { email, password });
+    const response = await API.post("api/auth/login", { email, password });
     const userData = response.data;
+    // console.log(userData, "<<<");
+
     // const userData = { email, password };
-    saveToken(userData.data, rememberMe);
+    saveToken(userData.token, rememberMe);
     return userData;
   } catch (error) {
     return rejectWithValue(error.response?.data?.message || "Login Failed");
