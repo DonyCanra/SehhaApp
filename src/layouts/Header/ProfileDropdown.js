@@ -4,7 +4,7 @@ import LogoutPage from "./Logout";
 import Icons from "../../utils/icons/IconHeader";
 
 const ProfileDropdown = () => {
-  const user = useSelector((state) => state.auth.KConfiqData?.user || null);
+  const user = useSelector((state) => state.auth.KConfiqData || null);
 
   const getFullName = () => (user ? `${user.firstName} ${user.lastName}` : "Guest");
 

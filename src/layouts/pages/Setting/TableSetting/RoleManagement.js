@@ -1,18 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
 import useModal from "../../../../components/hooks/useModal";
 import AddRole from "../FormSetting/FormRole";
 import EditRole from "../FormSetting/FormRole";
 import Icons from "../../../../utils/icons/IconAction";
+import { getRole } from "../../../../services/settings";
+import { useSelector } from "react-redux";
 
-const DataTable = ({ data, isAddRoleOpen, onAddRoleClose }) => {
+const DataTable = ({ isAddRoleOpen, onAddRoleClose }) => {
+  const hospitalId = useSelector((state) => state.auth.hospitalId);
+  const [roles, setRoles] = React.useState([]);
   const { isOpen: isLocalAddRoleOpen, openModal: openAddRole, closeModal: closeAddRole } = useModal();
   const { isOpen: isEditRoleOpen, openModal: openEditRole, closeModal: closeEditRole } = useModal();
 
   const isFormOpen = isAddRoleOpen || isLocalAddRoleOpen;
   const handleCloseForm = () => {
     closeAddRole();
-    onAddRoleClose(); // Panggil fungsi onAddRoleClose dari prop
+    onAddRoleClose();
   };
+
+  useEffect(() => {
+    const fetchRoles = async () => {
+      const roles = await getRole(hospitalId);
+      console.log(roles, "<<<");
+      setRoles(roles.roles);
+    };
+    fetchRoles();
+  }, [hospitalId]);
 
   return (
     <>
@@ -43,10 +56,10 @@ const DataTable = ({ data, isAddRoleOpen, onAddRoleClose }) => {
                 </tr>
               </thead>
               <tbody>
-                {data.map((item, index) => (
+                {roles.map((item, index) => (
                   <tr key={index} className="font-weight-normal border-bottom">
                     <td>{item.id}</td>
-                    <td>{item.nameRole}</td>
+                    <td style={{ textTransform: "capitalize" }}>{item.name}</td>
                     <td className="d-flex gap-2">
                       <Icons.Edit size={20} onClick={openEditRole} />
                       <Icons.Delete size={20} />
