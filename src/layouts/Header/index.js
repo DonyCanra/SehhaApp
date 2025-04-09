@@ -1,7 +1,7 @@
 import React from "react";
 // import { Link } from "react-router-dom";
 import toggleFullScreen from "../../utils/toggleFullScreen";
-import Icons from "../../utils/icons/IconHeader";
+// import Icons from "../../utils/icons/IconHeader";
 import useModal from "../../components/hooks/useModal";
 import HeaderBrand from "../../components/HeaderBrand";
 import ProfileDropdown from "./ProfileDropdown";
@@ -11,6 +11,7 @@ import Message from "./Message";
 import FullScreen from "./FullScreen";
 import SearchFeatures from "./SearchFeatures";
 import ModalSearchFeatures from "./ModalSearchFeatures";
+import Hospital from "./Hospital";
 // import SearchFeatures from "./SearchFeatures";
 // import Language from "./Language";
 
@@ -23,12 +24,7 @@ const Header = () => {
         <div className="container-fluid">
           <div className="d-flex">
             <HeaderBrand />
-            <div className="app-sidebar__toggle d-flex" data-bs-toggle="sidebar">
-              <div className="open-toggle">
-                <Icons.Toggle />
-              </div>
-            </div>
-            <SearchFeatures openModalSearchFeature={openModalSearchFeature} />
+            <Hospital />
             <div className="d-flex order-lg-2 ms-auto main-header-end">
               <button
                 className="navbar-toggler navresponsive-toggler d-md-none"
@@ -47,6 +43,12 @@ const Header = () => {
                     {/* <SearchFeatures /> */}
                     {/* <ThemeLayout /> */}
                     <FullScreen toggleFullScreen={toggleFullScreen} />
+                    {/* <div className="app-sidebar__toggle d-flex" data-bs-toggle="sidebar">
+                      <div className="open-toggle">
+                        <Icons.Toggle />
+                      </div>
+                    </div> */}
+                    <SearchFeatures openModalSearchFeature={openModalSearchFeature} />
                     {/* <Language /> */}
                     <Message />
                     <Notification />

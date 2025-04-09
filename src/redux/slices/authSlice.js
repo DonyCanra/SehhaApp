@@ -3,7 +3,7 @@ import { loginUser } from "../actions/authActions";
 
 const initialState = {
   KConfiqData: null,
-  hospitalId: null,
+  facility: null,
   loading: false,
   error: null,
 };
@@ -14,7 +14,7 @@ const authSlice = createSlice({
   reducers: {
     logout: (state) => {
       state.KConfiqData = null;
-      state.hospitalId = null;
+      state.facility = null;
       state.error = null;
       state.loading = false;
 
@@ -30,11 +30,11 @@ const authSlice = createSlice({
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         const user = action.payload?.user || null;
-        const hospitalId = user?.hospitals?.[0]?.id || null;
+        const facility = user?.hospitals?.[0] || null;
 
         state.loading = false;
         state.KConfiqData = user;
-        state.hospitalId = hospitalId;
+        state.facility = facility;
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;

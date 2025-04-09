@@ -2,7 +2,7 @@ import { RouterProvider } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import router from "../routes";
 import { Provider } from "react-redux";
-import store from "../redux/store/store";
+import store from "../redux/store";
 import GlobalLoading from "../components/Loader/GlobalLoading";
 
 function App() {

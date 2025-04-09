@@ -3,7 +3,7 @@ import useModal from "../../../../components/hooks/useModal";
 import AddRole from "../FormSetting/FormRole";
 import EditRole from "../FormSetting/FormRole";
 import Icons from "../../../../utils/icons/IconAction";
-import { getRole } from "../../../../services/settings";
+import { getRoleByHospitalID } from "../../../../services/settings";
 import { useSelector } from "react-redux";
 
 const DataTable = ({ isAddRoleOpen, onAddRoleClose }) => {
@@ -20,9 +20,9 @@ const DataTable = ({ isAddRoleOpen, onAddRoleClose }) => {
 
   useEffect(() => {
     const fetchRoles = async () => {
-      const roles = await getRole(hospitalId);
-      console.log(roles, "<<<");
-      setRoles(roles.roles);
+      const result = await getRoleByHospitalID(hospitalId);
+      console.log(result, "<<<");
+      setRoles(result.roles);
     };
     fetchRoles();
   }, [hospitalId]);
