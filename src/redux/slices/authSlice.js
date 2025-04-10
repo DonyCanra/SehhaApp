@@ -21,6 +21,15 @@ const authSlice = createSlice({
       localStorage.removeItem("token");
       sessionStorage.removeItem("token");
     },
+
+    // ✅ Tambahkan reducer baru
+    setFacilityByName: (state, action) => {
+      const hospitalName = action.payload;
+      const hospital = state.KConfiqData?.hospitals?.find((h) => h.name === hospitalName);
+      if (hospital) {
+        state.facility = hospital;
+      }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -43,5 +52,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { logout } = authSlice.actions;
+export const { logout, setFacilityByName } = authSlice.actions;
 export default authSlice.reducer;

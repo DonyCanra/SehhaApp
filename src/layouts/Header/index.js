@@ -11,12 +11,14 @@ import Message from "./Message";
 import FullScreen from "./FullScreen";
 import SearchFeatures from "./SearchFeatures";
 import ModalSearchFeatures from "./ModalSearchFeatures";
+import ModalHospitals from "./ModalHospitals";
 import Hospital from "./Hospital";
 // import SearchFeatures from "./SearchFeatures";
 // import Language from "./Language";
 
 const Header = () => {
   const { isOpen: isOpenSearchFeature, openModal: openModalSearchFeature, closeModal: closeModalSearchFeature } = useModal();
+  const { isOpen: isOpenHospitalsList, openModal: openModalHospitalsList, closeModal: closeModalHospitalsList } = useModal();
 
   return (
     <>
@@ -52,7 +54,7 @@ const Header = () => {
                     {/* <Language /> */}
                     <Message />
                     <Notification />
-                    <ProfileDropdown />
+                    <ProfileDropdown openModalHospitalsList={openModalHospitalsList} />
                   </div>
                 </div>
               </div>
@@ -61,6 +63,7 @@ const Header = () => {
         </div>
       </div>
       <ModalSearchFeatures show={isOpenSearchFeature} onClose={closeModalSearchFeature} />
+      <ModalHospitals show={isOpenHospitalsList} onClose={closeModalHospitalsList} />
     </>
   );
 };

@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { setFacilityByName } from "../../redux/slices/authSlice";
+import { setLoading } from "../../redux/slices/globalSlice";
 
 const Autocomplete = ({ label, id, name, placeholder, value, onChange, options, startIcon, className, isLoading, onClose }) => {
   const [filteredOptions, setFilteredOptions] = useState([]);
   const [showOptions, setShowOptions] = useState(false);
+
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleInputChange = (e) => {
     const inputValue = e.target.value;
@@ -35,6 +40,15 @@ const Autocomplete = ({ label, id, name, placeholder, value, onChange, options, 
 
     if (option.path) {
       navigate(option.path);
+      onChange({ target: { name, value: "" } });
+      onClose();
+    } else if (option.name) {
+      dispatch(setLoading(true));
+
+      setTimeout(() => {
+        dispatch(setLoading(false));
+      }, 2500);
+      dispatch(setFacilityByName(option.name));
       onChange({ target: { name, value: "" } });
       onClose();
     }
@@ -86,6 +100,7 @@ Autocomplete.propTypes = {
       _id: PropTypes.string,
       code: PropTypes.string,
       description: PropTypes.string,
+      name: PropTypes.string,
       path: PropTypes.string,
     })
   ),

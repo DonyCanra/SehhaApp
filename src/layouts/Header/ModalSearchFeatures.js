@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import LargeModal from "../../components/Modal/BaseModal";
+import Modal from "../../components/Modal/BaseModal";
 import Autocomplete from "../../components/Autocomplete/Autocomplete";
 import Search from "../../utils/icons/IconSearch";
 import { listRoutes } from "../../constants";
@@ -10,7 +10,7 @@ const ModalSearchFeatures = ({ show, onClose }) => {
 
   if (!show) return null;
   return (
-    <LargeModal show={show} title="Search Features" onClose={onClose}>
+    <Modal show={show} title="Search Features" onClose={onClose}>
       <div className="row" style={{ margin: "10px", height: "400px" }}>
         <Autocomplete
           id="routes"
@@ -23,7 +23,7 @@ const ModalSearchFeatures = ({ show, onClose }) => {
           onClose={onClose}
         />
       </div>
-    </LargeModal>
+    </Modal>
   );
 };
 

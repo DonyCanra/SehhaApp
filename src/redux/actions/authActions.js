@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import API from "../../services/api";
+import { setFacilityByName } from "../slices/authSlice";
 
 const saveToken = (token, rememberMe) => {
   if (rememberMe) {
@@ -17,8 +18,8 @@ export const clearAuthData = () => {
 export const loginUser = createAsyncThunk("auth/loginUser", async ({ email, password, rememberMe }, { rejectWithValue }) => {
   try {
     const response = await API.post("api/auth/login", { email, password });
-    const userData = response.data;
-    // console.log(userData, "<<<");
+    const userData = response.data.data;
+    console.log(userData, "<<<");
 
     // const userData = { email, password };
     saveToken(userData.token, rememberMe);
@@ -38,4 +39,8 @@ export const logoutUser = createAsyncThunk("auth/logoutUser", async (_, { dispat
   } catch (error) {
     return false;
   }
+});
+
+export const setFacilityByNameAsync = createAsyncThunk("auth/setFacilityByNameAsync", async (name, { dispatch }) => {
+  dispatch(setFacilityByName(name));
 });

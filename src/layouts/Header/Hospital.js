@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import { FiChevronsLeft, FiChevronsRight } from "react-icons/fi";
+import { useSelector } from "react-redux";
 
 const Hospital = () => {
+  const hospital = useSelector((state) => state.auth.facility);
   const [collapsed, setCollapsed] = useState(false);
 
   const toggleSidebar = () => {
-    setCollapsed((prev) => !prev); // Cukup toggle state
+    setCollapsed((prev) => !prev);
   };
 
   useEffect(() => {
@@ -22,12 +24,13 @@ const Hospital = () => {
     }
   }, [collapsed]);
 
+  const hospitalName = hospital?.name || "-";
+
   return (
     <div
       style={{
         display: "flex",
         alignItems: "center",
-        padding: "0 10px",
         gap: "10px",
       }}
     >
@@ -42,7 +45,7 @@ const Hospital = () => {
           backgroundColor: "#fff",
           display: "flex",
           alignItems: "center",
-          justifyContent: "center",
+          justifyContent: "left",
           cursor: "pointer",
           boxShadow: "0 0 4px rgba(0,0,0,0.1)",
         }}
@@ -51,7 +54,7 @@ const Hospital = () => {
         {collapsed ? <FiChevronsRight size={18} /> : <FiChevronsLeft size={18} />}
       </button>
       <img src="https://marketplace.canva.com/EAFy_Odspp4/1/0/1600w/canva-hijau-dan-biru-modern-logo-klinik-kesehatan-Ob6CJsae0us.jpg" alt="Logo" style={{ width: "50px", height: "50px", borderRadius: "50%" }} />
-      <span className="page-title mb-0 text-primary">Klinik Harapan Bunda</span>
+      <span className="page-title mb-0 text-primary">{hospitalName}</span>
     </div>
   );
 };

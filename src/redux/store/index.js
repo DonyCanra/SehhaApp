@@ -8,7 +8,7 @@ import globalReducer from "../slices/globalSlice";
 const authPersistConfig = {
   key: "auth",
   storage,
-  whitelist: ["KConfiqData", "hospitalId"], // hanya simpan field ini
+  whitelist: ["KConfiqData", "facility"], // hanya simpan field ini
 };
 
 const persistedAuthReducer = persistReducer(authPersistConfig, authReducer);

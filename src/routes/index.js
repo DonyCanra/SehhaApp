@@ -28,60 +28,68 @@ const ProtectedRoute = ({ element }) => {
   return element;
 };
 
-const router = createBrowserRouter([
+const router = createBrowserRouter(
+  [
+    {
+      path: "/login",
+      element: <LoginPage />,
+    },
+    {
+      path: "/resend-email",
+      element: <ResendEmail />,
+    },
+    {
+      path: "/reset-password",
+      element: <ResetPassword />,
+    },
+    {
+      path: "/*",
+      element: <PageNotFound />, // Halaman 404 jika route tidak ditemukan
+    },
+    {
+      element: <Layout />, // Layout untuk halaman yang butuh autentikasi
+      children: [
+        {
+          path: "/",
+          element: <ProtectedRoute element={<Dashboard />} />,
+        },
+        {
+          path: "/registration",
+          element: <ProtectedRoute element={<Registration />} />,
+        },
+        {
+          path: "/emr",
+          element: <ProtectedRoute element={<EMR />} />,
+        },
+        {
+          path: "/pharmacy",
+          element: <ProtectedRoute element={<Pharmacy />} />,
+        },
+        {
+          path: "/cashier",
+          element: <ProtectedRoute element={<Cashier />} />,
+        },
+        {
+          path: "/profile",
+          element: <ProtectedRoute element={<Profile />} />,
+        },
+        {
+          path: "/setting",
+          element: <ProtectedRoute element={<Setting />} />,
+        },
+        {
+          path: "/chat",
+          element: <ProtectedRoute element={<Chat />} />,
+        },
+      ],
+    },
+  ],
   {
-    path: "/login",
-    element: <LoginPage />,
-  },
-  {
-    path: "/resend-email",
-    element: <ResendEmail />,
-  },
-  {
-    path: "/reset-password",
-    element: <ResetPassword />,
-  },
-  {
-    path: "/*",
-    element: <PageNotFound />, // Halaman 404 jika route tidak ditemukan
-  },
-  {
-    element: <Layout />, // Layout untuk halaman yang butuh autentikasi
-    children: [
-      {
-        path: "/",
-        element: <ProtectedRoute element={<Dashboard />} />,
-      },
-      {
-        path: "/registration",
-        element: <ProtectedRoute element={<Registration />} />,
-      },
-      {
-        path: "/emr",
-        element: <ProtectedRoute element={<EMR />} />,
-      },
-      {
-        path: "/pharmacy",
-        element: <ProtectedRoute element={<Pharmacy />} />,
-      },
-      {
-        path: "/cashier",
-        element: <ProtectedRoute element={<Cashier />} />,
-      },
-      {
-        path: "/profile",
-        element: <ProtectedRoute element={<Profile />} />,
-      },
-      {
-        path: "/setting",
-        element: <ProtectedRoute element={<Setting />} />,
-      },
-      {
-        path: "/chat",
-        element: <ProtectedRoute element={<Chat />} />,
-      },
-    ],
-  },
-]);
+    future: {
+      v7_startTransition: true,
+      v7_relativeSplatPath: true,
+    },
+  }
+);
 
 export default router;

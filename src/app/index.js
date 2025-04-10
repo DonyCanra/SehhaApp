@@ -7,13 +7,11 @@ import GlobalLoading from "../components/Loader/GlobalLoading";
 
 function App() {
   return (
-    <>
-      <Provider store={store}>
-        <GlobalLoading />
-        <Toaster position="top-right" reverseOrder={false} />
-        <RouterProvider router={router} />
-      </Provider>
-    </>
+    <Provider store={store}>
+      <GlobalLoading />
+      <Toaster position="top-right" reverseOrder={false} />
+      <RouterProvider router={router} future={{ v7_startTransition: true }} />
+    </Provider>
   );
 }
 
