@@ -18,7 +18,7 @@ const Layout = () => {
             <Sidebar />
             <div className="app-content main-content">
               <div className="side-app">
-                <Header />
+                <Header style={{ borderBottom: "1px solid red" }} />
                 <Outlet />
               </div>
             </div>

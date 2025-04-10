@@ -6,6 +6,7 @@ import LogActivity from "./LogActivity";
 import useModal from "../../../components/hooks/useModal";
 import AddEMR from "./AddEMR";
 import PageHeader from "../../../components/PageHeader";
+import DropdownButton from "../../../components/Button/DropdownButton";
 
 const userInfo = {
   name: "Dony Canra",
@@ -77,18 +78,7 @@ const EMR = () => {
             </div>
           </div>
           <div className="col-xl-4 text-xl-right text-left btn-list mt-4">
-            <button type="button" className="btn btn-info dropdown-toggle" data-bs-toggle="dropdown">
-              Engaged <span className="caret"></span>
-            </button>
-            <ul className="dropdown-menu">
-              {statusEMR?.map((status, index) => (
-                <li key={index}>
-                  <Link to="#" className={status === "Done" ? "text-success" : status === "Failed" ? "text-danger" : ""}>
-                    {status}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            <DropdownButton options={statusEMR} defaultLabel="Engaged" icon={<i className="fa fa-calendar fs-14" />} onSelect={(val) => console.log("Date selected:", val)} />
             <Link onClick={openModalAddEMR} className="btn btn-outline-primary">
               + EMR
             </Link>

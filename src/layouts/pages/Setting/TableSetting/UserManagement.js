@@ -8,7 +8,7 @@ import { getUserByHospitalID } from "../../../../services/settings";
 import { useSelector } from "react-redux";
 
 const DataTable = ({ data }) => {
-  const hospitalId = useSelector((state) => state.auth.hospitalId);
+  const hospitalId = useSelector((state) => state.auth.facility.id);
   const [users, setUsers] = React.useState([]);
   const { isOpen: isAddUserOpen, openModal: openAddUser, closeModal: closeAddUser } = useModal();
   const { isOpen: isEditUserOpen, openModal: openEditUser, closeModal: closeEditUser } = useModal();

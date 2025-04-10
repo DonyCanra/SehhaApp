@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { toast } from "react-hot-toast";
-import { setLoading } from "../../redux/slices/globalSlice"; // Import action Redux
+import { setGlobalLoading } from "../../redux/slices/globalSlice"; // Import action Redux
 import Icons from "../../utils/icons/IconHeader";
 
 const Logout = () => {
@@ -9,7 +9,7 @@ const Logout = () => {
   const dispatch = useDispatch();
 
   const handleLogout = () => {
-    dispatch(setLoading(true));
+    dispatch(setGlobalLoading(true));
 
     setTimeout(() => {
       localStorage.removeItem("authToken");
@@ -19,7 +19,7 @@ const Logout = () => {
 
       toast.success("Logout Successfully!", { duration: 1500 });
 
-      dispatch(setLoading(false));
+      dispatch(setGlobalLoading(false));
       navigate("/login");
     }, 2000);
   };

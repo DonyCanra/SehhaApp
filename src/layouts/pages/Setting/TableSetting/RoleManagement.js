@@ -7,7 +7,7 @@ import { getRoleByHospitalID } from "../../../../services/settings";
 import { useSelector } from "react-redux";
 
 const DataTable = ({ isAddRoleOpen, onAddRoleClose }) => {
-  const hospitalId = useSelector((state) => state.auth.hospitalId);
+  const hospitalId = useSelector((state) => state.auth.facility.id);
   const [roles, setRoles] = React.useState([]);
   const { isOpen: isLocalAddRoleOpen, openModal: openAddRole, closeModal: closeAddRole } = useModal();
   const { isOpen: isEditRoleOpen, openModal: openEditRole, closeModal: closeEditRole } = useModal();
@@ -56,16 +56,24 @@ const DataTable = ({ isAddRoleOpen, onAddRoleClose }) => {
                 </tr>
               </thead>
               <tbody>
-                {roles.map((item, index) => (
-                  <tr key={index} className="font-weight-normal border-bottom">
-                    <td>{item.id}</td>
-                    <td style={{ textTransform: "capitalize" }}>{item.name}</td>
-                    <td className="d-flex gap-2">
-                      <Icons.Edit size={20} onClick={openEditRole} />
-                      <Icons.Delete size={20} />
+                {roles.length === 0 ? (
+                  <tr>
+                    <td colSpan="3" className="text-center text-muted py-4">
+                      No roles found.
                     </td>
                   </tr>
-                ))}
+                ) : (
+                  roles.map((item, index) => (
+                    <tr key={index} className="font-weight-normal border-bottom">
+                      <td>{item.id}</td>
+                      <td style={{ textTransform: "capitalize" }}>{item.name}</td>
+                      <td className="d-flex gap-2">
+                        <Icons.Edit size={20} onClick={openEditRole} />
+                        <Icons.Delete size={20} />
+                      </td>
+                    </tr>
+                  ))
+                )}
               </tbody>
             </table>
           </div>

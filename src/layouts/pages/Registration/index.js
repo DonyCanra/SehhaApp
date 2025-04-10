@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import useModal from "../../../components/hooks/useModal";
-import FilterDate from "../../../components/FilterDate";
 import DataTable from "./DataTable";
 import AddPatient from "./FormRegistration";
+import DropdownButton from "../../../components/Button/DropdownButton";
 
 const Registration = () => {
   const { isOpen, openModal, closeModal } = useModal();
@@ -35,7 +35,12 @@ const Registration = () => {
               <i className="fe fe-download me-2"></i>
               Import
             </button>
-            <FilterDate />
+            <DropdownButton
+              options={["Today", "Yesterday", "Last 7 days", "Last 30 days", "Last Month", "Last 6 months", "Last year"]}
+              defaultLabel="Last 7 days"
+              icon={<i className="fa fa-calendar fs-14" />}
+              onSelect={(val) => console.log("Date selected:", val)}
+            />
           </div>
         </div>
       </div>

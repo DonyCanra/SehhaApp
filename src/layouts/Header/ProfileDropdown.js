@@ -34,7 +34,7 @@ const ProfileDropdown = ({ openModalHospitalsList }) => {
             <div className="fs-13">Facility</div>
           </Link>
           <Link className="dropdown-item d-flex" onClick={openModalHospitalsList}>
-            <Icons.Profile />
+            <Icons.Change />
             <div className="fs-13">Switch Facility</div>
           </Link>
           <Link className="dropdown-item d-flex" to="/setting">

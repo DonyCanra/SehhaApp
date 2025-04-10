@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setFacilityByName } from "../../redux/slices/authSlice";
-import { setLoading } from "../../redux/slices/globalSlice";
+import { setGlobalLoading } from "../../redux/slices/globalSlice";
 
 const Autocomplete = ({ label, id, name, placeholder, value, onChange, options, startIcon, className, isLoading, onClose }) => {
   const [filteredOptions, setFilteredOptions] = useState([]);
@@ -43,10 +43,10 @@ const Autocomplete = ({ label, id, name, placeholder, value, onChange, options, 
       onChange({ target: { name, value: "" } });
       onClose();
     } else if (option.name) {
-      dispatch(setLoading(true));
+      dispatch(setGlobalLoading(true));
 
       setTimeout(() => {
-        dispatch(setLoading(false));
+        dispatch(setGlobalLoading(false));
       }, 2500);
       dispatch(setFacilityByName(option.name));
       onChange({ target: { name, value: "" } });
