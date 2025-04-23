@@ -5,6 +5,7 @@ import EditRole from "../FormSetting/FormRole";
 import Icons from "../../../../utils/icons/IconAction";
 import { getRoleByHospitalID } from "../../../../services/settings";
 import { useSelector } from "react-redux";
+import CustomButton from "../../../../components/Button/CustomButton";
 
 const DataTable = ({ isAddRoleOpen, onAddRoleClose }) => {
   const hospitalId = useSelector((state) => state.auth.facility.id);
@@ -21,8 +22,7 @@ const DataTable = ({ isAddRoleOpen, onAddRoleClose }) => {
   useEffect(() => {
     const fetchRoles = async () => {
       const result = await getRoleByHospitalID(hospitalId);
-      console.log(result, "<<<");
-      setRoles(result.roles);
+      setRoles(result.data || []);
     };
     fetchRoles();
   }, [hospitalId]);
@@ -34,10 +34,9 @@ const DataTable = ({ isAddRoleOpen, onAddRoleClose }) => {
           <h3 className="card-title">Role Management</h3>
           <div className="btn-list">
             {/* Tombol untuk membuka modal Add Role */}
-            <button className="btn btn-outline-primary" onClick={openAddRole}>
-              <i className="fe fe-plus me-2"></i>
+            <CustomButton onClick={() => openAddRole} icon={<i className="fe fe-plus" />}>
               Role
-            </button>
+            </CustomButton>
             <button className="btn btn-outline-primary">
               <i className="fe fe-upload me-2"></i>
               Import

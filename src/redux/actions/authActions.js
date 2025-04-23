@@ -1,28 +1,14 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import API from "../../services/api";
 import { setFacilityByName } from "../slices/authSlice";
-
-const saveToken = (token, rememberMe) => {
-  if (rememberMe) {
-    localStorage.setItem("token", token);
-  } else {
-    sessionStorage.setItem("token", token);
-  }
-};
-
-export const clearAuthData = () => {
-  localStorage.removeItem("token");
-  sessionStorage.removeItem("token");
-};
+import { setToken, removeToken } from "../../utils/tokenUtils";
 
 export const loginUser = createAsyncThunk("auth/loginUser", async ({ email, password, rememberMe }, { rejectWithValue }) => {
   try {
     const response = await API.post("api/auth/login", { email, password });
     const userData = response.data.data;
-    console.log(userData, "<<<");
 
-    // const userData = { email, password };
-    saveToken(userData.token, rememberMe);
+    setToken(userData.token, rememberMe);
     return userData;
   } catch (error) {
     return rejectWithValue(error.response?.data?.message || "Login Failed");
@@ -31,8 +17,7 @@ export const loginUser = createAsyncThunk("auth/loginUser", async ({ email, pass
 
 export const logoutUser = createAsyncThunk("auth/logoutUser", async (_, { dispatch }) => {
   try {
-    clearAuthData();
-
+    removeToken();
     dispatch({ type: "auth/resetState" });
 
     return true;

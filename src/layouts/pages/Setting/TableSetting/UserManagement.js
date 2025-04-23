@@ -14,12 +14,11 @@ const DataTable = ({ data }) => {
   const { isOpen: isEditUserOpen, openModal: openEditUser, closeModal: closeEditUser } = useModal();
 
   useEffect(() => {
-    const fetchRoles = async () => {
+    const fetchUsers = async () => {
       const result = await getUserByHospitalID(hospitalId);
-      console.log(result, "<<<");
-      setUsers(result.data.users);
+      setUsers(result.data || []);
     };
-    fetchRoles();
+    fetchUsers();
   }, [hospitalId]);
 
   return (

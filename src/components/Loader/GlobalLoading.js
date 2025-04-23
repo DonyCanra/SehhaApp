@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 const GlobalLoading = () => {
-  const loading = useSelector((state) => state.global.loading); // Ambil state dari Redux
+  const loading = useSelector((state) => state.global.loading);
 
   if (!loading) return null;
 
@@ -25,7 +25,7 @@ const styles = {
     left: 0,
     width: "100vw",
     height: "100vh",
-    backgroundColor: "rgba(255, 255, 255, 0.5)", // Transparan
+    backgroundColor: "rgba(255, 255, 255, 0.5)",
     zIndex: 9999,
     display: "flex",
     justifyContent: "center",
